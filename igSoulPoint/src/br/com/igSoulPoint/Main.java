@@ -64,30 +64,30 @@ public class Main extends JavaPlugin implements Listener{
 	    	 db.saveConfig();
 	    }
 		startSoulPointCounter(e.getPlayer());
-		String MensagemEntrou = config.getString("MensagemEntrou");
-		e.getPlayer().sendMessage(MensagemEntrou);
 	}
 	
 	  private void startSoulPointCounter(Player p) {
       new BukkitRunnable(){
         public void run(){
           if (p.hasPermission("igSoulPoint.vip")){
-        	  if(getSoulPoint(p) < 15) {
+        	  if(getSoulPoint(p) < config.getInt("MaxSoulVip")) {
         		 putSoulPoint(p,getSoulPoint(p) + 1);
-	            p.sendMessage("§c§l~ §7ja se passou Meia hora que você está se aventurando conosco! §7Tome, pegue este presente para você");
+        		 String message = config.getString("ReciveSoulVip").replaceAll("&", "§");
+ 	            p.sendMessage(message);
         	  }else {
-        		  putSoulPoint(p, 15);
+        		  putSoulPoint(p, config.getInt("MaxSoulVip"));
         	  }
           }else{
-        	  if(getSoulPoint(p) < 10) {
+        	  if(getSoulPoint(p) < config.getInt("MaxSoulPlayer")) {
         		 putSoulPoint(p, getSoulPoint(p) + 1);
-	            p.sendMessage("§c§l~ §7ja se passou Meia hora que você esá se aventurando conosco! §7Tome, pegue este presente para você");
+        		 String message = config.getString("ReciveSoulPlayer").replaceAll("&", "§");
+	            p.sendMessage(message);
         	  }else {
-        		  putSoulPoint(p, 10);
+        		  putSoulPoint(p, config.getInt("MaxSoulPlayer"));
         	  }
           }
       }
-    }.runTaskTimer(Main.plugin, 36000L, 36000L);
+    }.runTaskTimer(Main.plugin, config.getInt("SoulDelay") * (60 * 20L), config.getInt("SoulDelay") * (60 * 20L));
 } 
 	
 	

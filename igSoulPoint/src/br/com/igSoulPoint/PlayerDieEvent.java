@@ -14,12 +14,13 @@ public class PlayerDieEvent implements Listener{
 			e.setKeepInventory(true);
 			e.setKeepLevel(true);
 			Main.getInstance().putSoulPoint(p, Main.getInstance().getSoulPoint(p) - 1);
-			p.sendMessage("§cYou die, but your items were not dropped");
-			p.sendMessage("§cNow, you have " + Main.getInstance().getSoulPoint(p) + " Souls");
+			String message = Main.getInstance().config.getString("PlayerDieWithSoul").replaceAll("&", "§");
+			p.sendMessage(message);
 		}else {
 			e.setKeepInventory(false);
 			e.setKeepLevel(false);
-			p.sendMessage("§cYou die, and your items are dropped");
+			String message = Main.getInstance().config.getString("PlayerDieWithoutSoul").replaceAll("&", "§");
+			p.sendMessage(message);
 		}
 	}
 

@@ -2,4 +2,22 @@
 # -- CONFIG -- #
 # ------------ #
 
-MensagemEntrou: "Entrou"
+
+MaxSoulPlayer: 10
+MaxSoulVip: 15
+
+SoulDelay: 10 # Delay in minutes
+
+YourSouls: "&7You have &c@s &7Souls"
+PlayerSouls: "&c@p &7has &c@s &7Souls"
+
+PlayerChangePlayerSouls: "&7Now &c@p &7has &c@s &7Souls"
+
+PlayerDieWithoutSoul: "&cYou die, and your items are dropped"
+PlayerDieWithSoul: "&cYou die, but your items were not dropped"
+
+ReciveSoulPlayer: "&7You recive a soul!"
+ReciveSoulVip: "&7You recive a soul and you are VIP"
+
+PlayerOffline: "&cThis player is not Online"
+PlayerExists: "&cThis players doesn't exists"

@@ -12,21 +12,38 @@ public class Command implements CommandExecutor{
 		Player p = (Player) s;
 		if(c.getName().equalsIgnoreCase("Souls")) { 
 			if(args.length == 0) {
-				p.sendMessage("§7You have §c" + Main.getInstance().getSoulPoint(p) + " §7Souls");
+				String message = Main.getInstance().config.getString("YourSouls").replaceAll("&", "§").replaceAll("@s", "" + Main.getInstance().getSoulPoint(p));
+				p.sendMessage("" + message);
 			}else if(args.length == 1) {
 			 String player2name  = args[0].toString();
 			 if(Main.getInstance().db.contains("" + player2name)) {
 				 Player player2 = Bukkit.getPlayer(player2name);
 				 if(player2.isOnline()) {
-						 p.sendMessage("§c" + player2.getName() + " §7has" + " §c" + Main.getInstance().getSoulPoint(p) + " §7Souls");
+					 String message = Main.getInstance().config.getString("PlayerSouls").replaceAll("&", "§").replaceAll("@p","" + player2.getName()).replaceAll("@s", "" + Main.getInstance().getSoulPoint(player2));
+						 p.sendMessage(message);
 				 }else {
-					 p.sendMessage("§cThis player is not online");
+					 String message = Main.getInstance().config.getString("PlayerOffline").replaceAll("&", "§");
+					 p.sendMessage(message);
 					 return false;
 				 } 
 			 }else {
-				 p.sendMessage("§cThis player doesn't exists");
+				 String message = Main.getInstance().config.getString("PlayerExists").replaceAll("&", "§");
+				 p.sendMessage(message);
 				 return false;
 			 }
+			}else if(args.length == 3) {
+				if(args[0].equalsIgnoreCase("set")) {
+					 String player2name  = args[1].toString();
+					 if(Main.getInstance().db.contains("" + player2name)) {
+						 Player player2 = Bukkit.getPlayer(player2name);
+						 if(player2.isOnline()) {
+							 Main.getInstance().db.set(player2.getName(), Integer.parseInt(args[2].toString()));
+							 String message = Main.getInstance().config.getString("PlayerChangePlayerSouls").replaceAll("&", "§").replaceAll("@p", player2.getName()).replaceAll("@s", "" +  Main.getInstance().getSoulPoint(player2));
+							 p.sendMessage(message);
+						 }
+					 }
+				}
+				
 			}
 		}
 		return false;
