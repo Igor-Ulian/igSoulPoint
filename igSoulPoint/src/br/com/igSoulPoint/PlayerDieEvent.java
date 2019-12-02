@@ -15,7 +15,7 @@ public class PlayerDieEvent implements Listener{
 			e.setKeepLevel(true);
 			Main.getInstance().putSoulPoint(p, Main.getInstance().getSoulPoint(p) - 1);
 			p.sendMessage("§cYou die, but your items were not dropped");
-			p.sendMessage("§c-1 Soul");
+			p.sendMessage("§cNow, you have " + Main.getInstance().getSoulPoint(p) + " Souls");
 		}else {
 			e.setKeepInventory(false);
 			e.setKeepLevel(false);

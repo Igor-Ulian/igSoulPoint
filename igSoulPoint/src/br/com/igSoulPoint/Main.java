@@ -17,8 +17,8 @@ import org.bukkit.scheduler.BukkitRunnable;
 public class Main extends JavaPlugin implements Listener{
 	
 	  public static Main plugin;
-	  public Config db;
-	  public Config config;
+	  public Config db = new Config(this, "players.yml");; 
+	  public Config config = new Config(this, "config.yml");;
 	  
 	  public void onLoad(){
 		 plugin = this;
@@ -30,6 +30,8 @@ public class Main extends JavaPlugin implements Listener{
 	
 	@Override
 	public void onEnable() {
+		saveDefaultConfig();
+		config.saveDefault();
 	    Bukkit.getPluginManager().registerEvents(this, this);
 	    Bukkit.getPluginManager().registerEvents(new PlayerDieEvent(), this);
 	    getCommand("souls").setExecutor(new Command());
@@ -43,9 +45,6 @@ public class Main extends JavaPlugin implements Listener{
 				arquivop.createNewFile();
 			}
 		} catch (IOException e1) {e1.printStackTrace();} 
-		db = new Config(this, "players.yml");
-		config = new Config(this, "config.yml");
-		config.saveDefaultConfig();
 	}
 	
 	@Override
@@ -55,19 +54,16 @@ public class Main extends JavaPlugin implements Listener{
 	    c.sendMessage("§6igSoulPoint §cDesativado");
 	    c.sendMessage("");
 	    HandlerList.unregisterAll();
-	    saveConfig();
 	}
 
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent e) {
-		db = new Config(this, "Players.yml");
-	    if(!db.contains("" + e.getPlayer().getUniqueId())) {
-	    	 db.set("" + e.getPlayer().getUniqueId(), 10);
+	    if(!db.contains("" + e.getPlayer().getName())) {
+	    	 db.set("" + e.getPlayer().getName(), 10);
 	    	 db.saveConfig();
 	    }
 		startSoulPointCounter(e.getPlayer());
-		config = new Config(this, "config.yml");
 		String MensagemEntrou = config.getString("MensagemEntrou");
 		e.getPlayer().sendMessage(MensagemEntrou);
 	}
@@ -96,13 +92,11 @@ public class Main extends JavaPlugin implements Listener{
 	
 	
 	public int getSoulPoint(Player p) {
-		db = new Config(this, "players.yml");
-		return db.getInt("" + p.getUniqueId());
+		return db.getInt("" + p.getName());
 	}
 	
 	public void putSoulPoint(Player p, Integer value) {
-		db = new Config(this, "players.yml");
-		db.set("" + p.getUniqueId(), value);
+		db.set("" + p.getName(), value);
 		db.saveConfig();
 	}
 	
