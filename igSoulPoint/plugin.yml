@@ -3,3 +3,5 @@ author: Igor Ulian
 main: br.com.igSoulPoint.Main
 version: 1.0
 api-version: 1.13
+commands:
+  souls:

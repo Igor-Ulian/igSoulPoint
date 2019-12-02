@@ -32,24 +32,29 @@ public class Main extends JavaPlugin implements Listener{
 	@Override
 	public void onEnable() {
 	    Bukkit.getPluginManager().registerEvents(this, this);
+	    Bukkit.getPluginManager().registerEvents(new PlayerDieEvent(), this);
+	    getCommand("souls").setExecutor(new Command());
 	    ConsoleCommandSender c = Bukkit.getConsoleSender();
+	    c.sendMessage("");
 	    c.sendMessage("§6igSoulPoint §aAtivado");
+	    c.sendMessage("");
 		try {
-			File arquivop = new File("plugins/igSoulPoint/Players.yml");
+			File arquivop = new File("plugins/igSoulPoint/players.yml");
 			if(!arquivop.exists()) {
 				arquivop.createNewFile();
 			}
 		} catch (IOException e1) {e1.printStackTrace();} 
-		db = new Config(this, "Players.yml");
-		config.saveDefaultConfig();
+		db = new Config(this, "players.yml");
 		config = new Config(this, "config.yml");
-		
+		config.saveDefaultConfig();
 	}
 	
 	@Override
 	public void onDisable() {
 	    ConsoleCommandSender c = Bukkit.getConsoleSender();
+	    c.sendMessage("");
 	    c.sendMessage("§6igSoulPoint §cDesativado");
+	    c.sendMessage("");
 	    HandlerList.unregisterAll();
 	    saveConfig();
 	}
@@ -92,12 +97,12 @@ public class Main extends JavaPlugin implements Listener{
 	
 	
 	public int getSoulPoint(Player p) {
-		db = new Config(this, "Players.yml");
+		db = new Config(this, "players.yml");
 		return db.getInt("" + p.getUniqueId());
 	}
 	
 	public void putSoulPoint(Player p, Integer value) {
-		db = new Config(this, "Players.yml");
+		db = new Config(this, "players.yml");
 		db.set("" + p.getUniqueId(), value);
 		db.saveConfig();
 	}

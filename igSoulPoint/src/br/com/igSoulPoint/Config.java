@@ -88,9 +88,3 @@
 /* 88 */     getConfig().set(path, value);
 /*    */   }
 /*    */ }
-
-
-/* Location:              C:\Users\Particular\Desktop\plMageRPG__Bk_31-08-2019.jar!\br\com\servidor\Config.class
- * Java compiler version: 8 (52.0)
- * JD-Core Version:       0.7.1
- */
