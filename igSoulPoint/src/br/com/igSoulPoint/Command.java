@@ -16,17 +16,22 @@ public class Command implements CommandExecutor{
 			}else if(args.length == 1) {
 			 String player2name  = args[0].toString();
 			 Player player2 = Bukkit.getPlayer(player2name);
-			if(player2.getUniqueId() != null) {
+			if(player2.isValid()) {
 				 if(player2.isOnline()) {
 					 if(Main.getInstance().db.contains(player2.getUniqueId().toString())) {
 						 p.sendMessage("§7>> §c" + player2.getName() + " §7has" + " §c" + Main.getInstance().getSoulPoint(p) + " §7Souls");
 					 }else {
 						 p.sendMessage("§cThis player Doesn't exists");
+						 return false;
 					 }
 				 }else {
 					 p.sendMessage("§cThis player is not online");
+					 return false;
 				 }
-			}
+			}else {
+				 p.sendMessage("§cThis player Doesn't exists");
+				 return false;
+			 }
 			}
 		}
 		return false;
