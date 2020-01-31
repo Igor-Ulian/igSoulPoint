@@ -21,6 +21,10 @@ Set the player soul
 
 ![SetPlayerSoul](https://user-images.githubusercontent.com/48739190/73575010-ee59e880-4455-11ea-9f53-cfeac8e9d0b0.png)
 
+## Configurable Messages
+
+![Configurable](https://user-images.githubusercontent.com/48739190/73576025-409c0900-4458-11ea-8a41-8304ee8b3f99.PNG)
+
 ## Permissions
 
 ```
